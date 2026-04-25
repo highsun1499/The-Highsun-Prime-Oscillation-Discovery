@@ -13,12 +13,27 @@
         .container { max-width: 900px; margin: 0 auto; background: #222; padding: 30px; border-radius: 15px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
         h1 { color: gold; margin-bottom: 10px; }
         .author { color: #aaa; margin-bottom: 30px; }
-        #plot { background-color: white; border-radius: 10px; padding: 10px; margin-top: 20px; }
+        
+        /* 🛠 그래프 상자 보정 (핵심 수정 부분) */
+        #plot { 
+            background-color: white; 
+            border-radius: 10px; 
+            padding: 10px; 
+            margin-top: 20px; 
+            
+            /* 핵심: 상자 크기를 미리 고정하고 내부 요소가 넘치지 않게 함 */
+            height: 480px; 
+            overflow: hidden; 
+            box-sizing: border-box; /* 패딩이 크기에 영향을 주지 않도록 함 */
+            display: flex; /* 내부 그래프를 가운데 정렬하기 위해 추가 */
+            justify-content: center;
+            align-items: center;
+        }
+
         .controls { margin: 20px 0; padding: 15px; background: #333; border-radius: 10px; }
         input[type=range] { width: 80%; }
         .description { text-align: left; line-height: 1.6; color: #ccc; margin-top: 30px; border-top: 1px solid #444; padding-top: 20px; }
-    </style>
-</head>
+    </style></head>
 <body>
 
 <div class="container">
