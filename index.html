@@ -14,18 +14,16 @@
         h1 { color: gold; margin-bottom: 10px; }
         .author { color: #aaa; margin-bottom: 30px; }
         
-        /* 🛠 그래프 상자 보정 (핵심 수정 부분) */
         #plot { 
             background-color: white; 
             border-radius: 10px; 
             padding: 10px; 
             margin-top: 20px; 
             
-            /* 핵심: 상자 크기를 미리 고정하고 내부 요소가 넘치지 않게 함 */
             height: 480px; 
             overflow: hidden; 
-            box-sizing: border-box; /* 패딩이 크기에 영향을 주지 않도록 함 */
-            display: flex; /* 내부 그래프를 가운데 정렬하기 위해 추가 */
+            box-sizing: border-box;
+            display: flex; 
             justify-content: center;
             align-items: center;
         }
@@ -69,11 +67,9 @@ import sympy as sp
 from pyscript import display, when
 from js import document
 
-# 데이터 미리 생성 (성능을 위해 최적화)
 primes = list(sp.primerange(1, sp.prime(1000) + 1))
 
 def generate_plot(n):
-    # 1. 이전 그래프 정리 (메모리 누수 방지)
     plt.close('all') 
     
     a_vals = []
@@ -81,7 +77,6 @@ def generate_plot(n):
         s = "".join(str(p) for p in reversed(primes[:i]))
         a_vals.append(1.0 / float("0." + s[:17]))
     
-    # 2. 그래프 생성
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(range(1, n + 1), a_vals, '-o', color='gold', markersize=4, linewidth=1)
     ax.axhline(y=10.0, color='red', linestyle='--', alpha=0.3)
@@ -93,9 +88,8 @@ def generate_plot(n):
     ax.set_ylabel("Value (1/0.pn...p1)")
     ax.grid(True, alpha=0.3)
     
-    # 3. 화면 출력 (target 지정을 더 명확하게)
     plot_div = document.getElementById("plot")
-    plot_div.innerHTML = "" # 이전 내용 삭제
+    plot_div.innerHTML = "" 
     display(fig, target="plot")
 
 @when("input", "#n_slider")
@@ -104,7 +98,6 @@ def on_slider_change(event):
     document.getElementById("n_display").innerText = str(n)
     generate_plot(n)
 
-# 초기 실행
 generate_plot(10)
 </py-script>
 
