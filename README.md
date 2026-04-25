@@ -1,6 +1,6 @@
 # The Highsun Prime Oscillation Discovery
 
-Objective of this experiment:
+Objective of this experiment :
 
 Observation of the oscillation pattern created by the reciprocal of a prime reverse linked sequence
 
